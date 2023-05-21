@@ -4,7 +4,7 @@ import Login from './components/auth/Login'
 function App() {
   return (
     <>
-      <div className='grid text-left place-content-center items-center h-screen'>
+      <div>
         <div>
           <Login/>
         </div>
