@@ -82,14 +82,14 @@ test("userPassword should be empty initially", () => {
 //value should change using on change
 test("userName input should change", () => {
     render(<Login />)
-    const userNameInput = screen.getByPlaceholderText('Enter Your Name')
+    const userNameInput = screen.getByPlaceholderText('Enter Your Name') as HTMLInputElement
     const testuser = "mangesh"
     fireEvent.change(userNameInput,{target:{value:testuser}})
     expect(userNameInput.value).toBe(testuser)
 })
 test("userPassword input should change", () => {
     render(<Login />)
-    const userPasswordInput = screen.getByPlaceholderText('Enter Your Password')
+    const userPasswordInput = screen.getByPlaceholderText('Enter Your Password') as HTMLInputElement
     const testPassword = "Pass@1234"
     fireEvent.change(userPasswordInput,{target:{value:testPassword}})
     expect(userPasswordInput.value).toBe(testPassword)
@@ -100,15 +100,15 @@ test("userPassword input should change", () => {
 //if user name and password empty then loginButton should disabled
 test("LoginButton should not be disable when input exist", () => {
     render(<Login />)
-    const userNameInput = screen.getByPlaceholderText('Enter Your Name')
-    const userPasswordInput = screen.getByPlaceholderText('Enter Your Password')
+    const userNameInput = screen.getByPlaceholderText('Enter Your Name') as HTMLInputElement
+    const userPasswordInput = screen.getByPlaceholderText('Enter Your Password') as HTMLInputElement
 
     const loginButton = screen.getByTestId("loginButton")
 
     const testuser = "mangesh"
     const testPassword = "Pass@1234"
 
-    fireEvent.change(userNameInput, { target: { value: testuser } })
+    fireEvent.change(userNameInput, { target: { value: testuser } }) 
     fireEvent.change(userPasswordInput, { target: { value: testPassword } })
     
     expect(userNameInput.value).toBe(testuser)

@@ -11,7 +11,7 @@ const Login = () => {
      console.log(info)
   }
 
-  const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onValueChange = (e: React.ChangeEvent<EventTarget>) => {
     const { name, value } = e.target as HTMLInputElement;
     setInfo((prevState) => ({
       ...prevState,
