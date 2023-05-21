@@ -11,11 +11,13 @@ const Login = () => {
      console.log(info)
   }
 
-  const onValueChange = (e:any) => {
-    let name = e.target.name
-    let value=e.target.value
-    setInfo({...info,[name]:value})
-  }
+  const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target as HTMLInputElement;
+    setInfo((prevState) => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
 
   return (
     <div className='grid text-left justify-center items-center  h-screen shadow-xl'>
