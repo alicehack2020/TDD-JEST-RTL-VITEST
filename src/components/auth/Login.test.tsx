@@ -17,6 +17,12 @@ test("welcome to tree foundation heading should match", () => {
     expect(heading.textContent).toMatch(/Welcome to tree foundation/i);
 });
 
+test("logo should be render", () => {
+    render(<Login />)
+    const heading = screen.getByTestId("logo")
+    expect(heading).toBeInTheDocument()
+})
+
 
 
 //label
