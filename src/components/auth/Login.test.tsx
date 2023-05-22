@@ -1,120 +1,121 @@
-import { fireEvent, render, screen } from "@testing-library/react"
+import {  render, screen } from "@testing-library/react"
+import userEvent from '@testing-library/user-event'
 import Login from "./Login"
 import { expect } from "vitest";
  
 
+const formData ={
+    username:'mangesh123',
+    password:'12345'
+}
 
-//render check
-test("welcome to tree foundation heading should be render", () => {
-    render(<Login />)
-    const heading = screen.getByTestId("welcome")
-    expect(heading).toBeInTheDocument()
-})
+// 
 
-test("welcome to tree foundation heading should match", () => {
-    render(<Login />);
-    const heading = screen.getByTestId("welcome");
-    expect(heading.textContent).toMatch(/Welcome to tree foundation/i);
-});
+// 1) getBYRole
+// 2) getByLabelText
+// 3) getByPlaceHolder
 
-test("logo should be render", () => {
-    render(<Login />)
-    const heading = screen.getByTestId("logo")
-    expect(heading).toBeInTheDocument()
-})
+//
 
+describe('Login Form',()=>{
+    test('renders correclty', () => {
+        render(<Login />)
+        const loginHeading = screen.getByRole('heading', {
+            level: 1, name: /Welcome to tree foundation/i
+        })
 
+        const logo = screen.getByAltText("logo")
+        
+        
 
-//label
-test("userName label should be present/render", () => {
-    render(<Login />)
-    const userNameLabel = screen.getByTestId('user name label')
-    expect(userNameLabel).toBeInTheDocument()
-})
+        const userNameLabel =screen.getByRole('label', { name: /Enter Your Name/i }); 
+        const userPasswordLabel = screen.getByRole('label', { name: /Enter Your Password/i })
 
-test("userPassword label should be present/render", () => {
-    render(<Login />)
-    const userPasswordLabel = screen.getByTestId('user password label')
-    expect(userPasswordLabel).toBeInTheDocument()
-})
+        const userNameInput = screen.getByRole('textbox',{
+            name:/username/i
+        })
 
+        const userPasswordInput = screen.getByLabelText(/userPassword/i)
 
-//input,button
-test("userName input should be present/render", () => {
-    render(<Login />)
-    const userNameInput = screen.getByPlaceholderText('Enter Your Name')
-    expect(userNameInput).toBeInTheDocument()
-})
-
-test("userPassword input should be present/render", () => {
-    render(<Login />)
-    const userPasswordInput = screen.getByPlaceholderText('Enter Your Password')
-    expect(userPasswordInput).toBeInTheDocument()
-})
-
-test("loginButton should be present/render", () => {
-    render(<Login />)
-    const loginButton = screen.getByTestId('loginButton')
-    expect(loginButton).toBeInTheDocument()
-})
-
-//button initially disabled
-test("login button should disable initially", () => {
-    render(<Login />)
-    const loginButton = screen.getByTestId("loginButton")
-    expect(loginButton).toBeDisabled()
-})
+        const loginButton = screen.getByRole('button')
 
 
-// input empty initially
-test("userName should be empty initially", () => {
-    render(<Login />)
-    const userNameInput = screen.getByPlaceholderText('Enter Your Name')
-    expect(userNameInput.textContent).toBe("")
-})
+        expect(loginHeading).toBeInTheDocument()
+        expect(logo).toBeInTheDocument()
 
-test("userPassword should be empty initially", () => {
-    render(<Login />)
-    const userPasswordInput = screen.getByPlaceholderText('Enter Your Password')
-    expect(userPasswordInput.textContent).toBe("")
-})
+        expect(userNameLabel).toBeInTheDocument()
+        expect(userPasswordLabel).toBeInTheDocument()
 
-//value should change using on change
-test("userName input should change", () => {
-    render(<Login />)
-    const userNameInput = screen.getByPlaceholderText('Enter Your Name') as HTMLInputElement
-    const testuser = "mangesh"
-    fireEvent.change(userNameInput,{target:{value:testuser}})
-    expect(userNameInput.value).toBe(testuser)
-})
-test("userPassword input should change", () => {
-    render(<Login />)
-    const userPasswordInput = screen.getByPlaceholderText('Enter Your Password') as HTMLInputElement
-    const testPassword = "Pass@1234"
-    fireEvent.change(userPasswordInput,{target:{value:testPassword}})
-    expect(userPasswordInput.value).toBe(testPassword)
-})
+        expect(userNameInput).toBeInTheDocument()
+        expect(userPasswordInput).toBeInTheDocument()
+        expect(loginButton).toBeInTheDocument()
 
+        
+    })
 
-
-//if user name and password empty then loginButton should disabled
-test("LoginButton should not be disable when input exist", () => {
-    render(<Login />)
-    const userNameInput = screen.getByPlaceholderText('Enter Your Name') as HTMLInputElement
-    const userPasswordInput = screen.getByPlaceholderText('Enter Your Password') as HTMLInputElement
-
-    const loginButton = screen.getByTestId("loginButton")
-
-    const testuser = "mangesh"
-    const testPassword = "Pass@1234"
-
-    fireEvent.change(userNameInput, { target: { value: testuser } }) 
-    fireEvent.change(userPasswordInput, { target: { value: testPassword } })
     
-    expect(userNameInput.value).toBe(testuser)
-    expect(userPasswordInput.value).toBe(testPassword)
+    test("input should change on change", async () => {
+        render(<Login />)
+        const userNameInput = screen.getByRole('textbox',{
+            name:/userName/i
+        })
 
-    expect(loginButton).not.toBeDisabled()
+        const userPasswordInput = screen.getByRole('textbox', {
+            name:/userpassword/i
+        })
+
+        await userEvent.type(userNameInput,formData.username)
+        await userEvent.type(userPasswordInput,formData.username)
+        expect(userNameInput).toHaveValue(formData.username)
+        expect(userPasswordInput).toHaveValue(formData.password)
+         
+    })
+
+    test("login button should disable initially", () => {
+        render(<Login />)
+        const loginButton = screen.getByRole("button", {name:/login/i})
+        expect(loginButton).toBeDisabled()
+    })
+
+    test("input should be empty initially", () => {
+        render(<Login />)
+        const userNameInput = screen.getByRole('textbox',{
+            name:/username/i
+        })
+
+        const userPasswordInput = screen.getByRole('textbox', {
+            name:/userpassword/i
+        })
+
+        expect(userNameInput).toBe("")
+        expect(userPasswordInput).toBe("")
+
+    })
+
+    test("LoginButton should not be disable when input exist", async () => {
+        render(<Login />)
+        const userNameInput = screen.getByRole('textbox',{
+            name:/username/i
+        })
+
+        const userPasswordInput = screen.getByRole('textbox', {
+            name:/userpassword/i
+        })
+
+        const loginButton = screen.getByRole('button')
+    
+        await userEvent.type(userNameInput,formData.username)
+        await userEvent.type(userPasswordInput,formData.username)
+        expect(userNameInput).toHaveValue(formData.username)
+        expect(userPasswordInput).toHaveValue(formData.password)
+        expect(loginButton).not.toBeDisabled()
+    })
 })
 
+
+ 
+
+ 
+ 
+ 
 
