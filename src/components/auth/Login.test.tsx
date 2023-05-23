@@ -9,29 +9,11 @@ const formData ={
     password:'12345'
 }
 
-// 
-
-// 1) getBYRole
-// 2) getByLabelText
-// 3) getByPlaceHolder
-
-//
+ 
 
 describe('Login Form',()=>{
 
-    // test('render correctly',()=>{
-    //     render(<Login/>)
-
-    //     const mainHeading = screen.getByRole('heading',{
-    //         level:1
-    //     })
-
-    //     // const userNameInput = screen.getByLabelText('Enter Your Name') 
-    //     const userNameInput = screen.getByRole('textbox',{
-    //         name:/Enter Your Name/i
-    //     })
-
-    // })
+ 
     test('renders correclty', () => {
         render(<Login />)
         const loginHeading = screen.getByRole('heading', {
@@ -42,18 +24,12 @@ describe('Login Form',()=>{
         const userNameInput = screen.getByRole('textbox',{
             name:/Enter Your Name/i
         })
-
-        
         const userPasswordInput = screen.getByLabelText(/Enter Your Password/i)
-
          const loginButton = screen.getByRole('button')
 
 
         expect(loginHeading).toBeInTheDocument()
         expect(logo).toBeInTheDocument()
-
-       
-
         expect(userNameInput).toBeInTheDocument()
         expect(userPasswordInput).toBeInTheDocument()
         expect(loginButton).toBeInTheDocument()
@@ -66,10 +42,10 @@ describe('Login Form',()=>{
         render(<Login />)
         const userNameInput = screen.getByRole('textbox',{
             name:/Enter Your Name/i
-        })
+        }) as HTMLElement
+        const userPasswordInput = screen.getByLabelText(/Enter Your Password/i)  
 
-        const userPasswordInput = screen.getByLabelText(/Enter Your Password/i)
-
+        await userEvent.clear(userNameInput); // Clear the input before typing
         await userEvent.type(userNameInput,formData.username)
         await userEvent.type(userPasswordInput, formData.password)
         
@@ -90,7 +66,7 @@ describe('Login Form',()=>{
             name:/Enter Your Name/i
         }) as HTMLElement
 
-        const userPasswordInput = screen.getByLabelText(/Enter Your Password/i) as HTMLElement
+        const userPasswordInput = screen.getByLabelText(/Enter Your Password/i)  
 
         expect(userNameInput).toHaveValue("")
         expect(userPasswordInput).toHaveValue("")
@@ -104,9 +80,9 @@ describe('Login Form',()=>{
         })
 
         const userPasswordInput = screen.getByLabelText(/Enter Your Password/i)
-
         const loginButton = screen.getByRole('button')
-    
+
+        await userEvent.clear(userNameInput); // Clear the input before typing
         await userEvent.type(userNameInput,formData.username)
         await userEvent.type(userPasswordInput,formData.password)
         expect(userNameInput).toHaveValue(formData.username)
