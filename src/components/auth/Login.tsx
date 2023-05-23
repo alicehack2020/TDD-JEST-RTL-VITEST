@@ -32,11 +32,11 @@ const Login = () => {
       </h1> 
         <div>
           
-           <label className="mt-4">Enter Your Name</label><br />
-           <input type="text" name="userName" placeholder="Enter Your Name" className="w-full my-2 p-2 border-2 border-gray-300 rounded-md outline-transparent hover:outline-blue-400" value={info.userName} onChange={onValueChange}/><br />
+           <label className="mt-4" htmlFor="userName">Enter Your Name</label><br />
+           <input type="text" id="userName" name="userName" placeholder="Enter Your Name" className="w-full my-2 p-2 border-2 border-gray-300 rounded-md outline-transparent hover:outline-blue-400" value={info.userName} onChange={onValueChange}/><br />
         
          
-          <label >
+          <label role="label">
             Enter Your Password
            <input  type="password" name="userPassword" aria-label="userPassword"  placeholder="Enter Your Password" className="w-full my-2 p-2 border-2 border-gray-300 rounded-md outline-transparent hover:outline-blue-400" value={info.userPassword} onChange={onValueChange}/><br />
           </label> 

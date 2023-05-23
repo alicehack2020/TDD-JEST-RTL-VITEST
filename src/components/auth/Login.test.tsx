@@ -18,6 +18,20 @@ const formData ={
 //
 
 describe('Login Form',()=>{
+
+    // test('render correctly',()=>{
+    //     render(<Login/>)
+
+    //     const mainHeading = screen.getByRole('heading',{
+    //         level:1
+    //     })
+
+    //     // const userNameInput = screen.getByLabelText('Enter Your Name') 
+    //     const userNameInput = screen.getByRole('textbox',{
+    //         name:/Enter Your Name/i
+    //     })
+
+    // })
     test('renders correclty', () => {
         render(<Login />)
         const loginHeading = screen.getByRole('heading', {
@@ -25,26 +39,20 @@ describe('Login Form',()=>{
         })
 
         const logo = screen.getByAltText("logo")
-        
-        
-
-        const userNameLabel =screen.getByRole('label', { name: /Enter Your Name/i }); 
-        const userPasswordLabel = screen.getByRole('label', { name: /Enter Your Password/i })
-
         const userNameInput = screen.getByRole('textbox',{
-            name:/username/i
+            name:/Enter Your Name/i
         })
 
-        const userPasswordInput = screen.getByLabelText(/userPassword/i)
+        
+        const userPasswordInput = screen.getByLabelText(/Enter Your Password/i)
 
-        const loginButton = screen.getByRole('button')
+         const loginButton = screen.getByRole('button')
 
 
         expect(loginHeading).toBeInTheDocument()
         expect(logo).toBeInTheDocument()
 
-        expect(userNameLabel).toBeInTheDocument()
-        expect(userPasswordLabel).toBeInTheDocument()
+       
 
         expect(userNameInput).toBeInTheDocument()
         expect(userPasswordInput).toBeInTheDocument()
@@ -57,15 +65,14 @@ describe('Login Form',()=>{
     test("input should change on change", async () => {
         render(<Login />)
         const userNameInput = screen.getByRole('textbox',{
-            name:/userName/i
+            name:/Enter Your Name/i
         })
 
-        const userPasswordInput = screen.getByRole('textbox', {
-            name:/userpassword/i
-        })
+        const userPasswordInput = screen.getByLabelText(/Enter Your Password/i)
 
         await userEvent.type(userNameInput,formData.username)
-        await userEvent.type(userPasswordInput,formData.username)
+        await userEvent.type(userPasswordInput, formData.password)
+        
         expect(userNameInput).toHaveValue(formData.username)
         expect(userPasswordInput).toHaveValue(formData.password)
          
@@ -80,37 +87,38 @@ describe('Login Form',()=>{
     test("input should be empty initially", () => {
         render(<Login />)
         const userNameInput = screen.getByRole('textbox',{
-            name:/username/i
-        })
+            name:/Enter Your Name/i
+        }) as HTMLElement
 
-        const userPasswordInput = screen.getByRole('textbox', {
-            name:/userpassword/i
-        })
+        const userPasswordInput = screen.getByLabelText(/Enter Your Password/i) as HTMLElement
 
-        expect(userNameInput).toBe("")
-        expect(userPasswordInput).toBe("")
+        expect(userNameInput).toHaveValue("")
+        expect(userPasswordInput).toHaveValue("")
 
     })
 
     test("LoginButton should not be disable when input exist", async () => {
         render(<Login />)
         const userNameInput = screen.getByRole('textbox',{
-            name:/username/i
+            name:/Enter Your Name/i
         })
 
-        const userPasswordInput = screen.getByRole('textbox', {
-            name:/userpassword/i
-        })
+        const userPasswordInput = screen.getByLabelText(/Enter Your Password/i)
 
         const loginButton = screen.getByRole('button')
     
         await userEvent.type(userNameInput,formData.username)
-        await userEvent.type(userPasswordInput,formData.username)
+        await userEvent.type(userPasswordInput,formData.password)
         expect(userNameInput).toHaveValue(formData.username)
         expect(userPasswordInput).toHaveValue(formData.password)
         expect(loginButton).not.toBeDisabled()
     })
 })
+   
+
+
+
+
 
 
  
