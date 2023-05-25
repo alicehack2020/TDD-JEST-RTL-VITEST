@@ -8,6 +8,10 @@ const navItem = [
   {
     href:"/login",
     title:"Login"
+  },
+  {
+    href:"/form",
+    title:"Form"
   }
 ]
 

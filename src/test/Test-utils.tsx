@@ -1,10 +1,11 @@
 import React,{ReactElement} from 'react'
 import {render,RenderOptions} from '@testing-library/react'
-import { BrowserRouter ,MemoryRouter} from 'react-router-dom'
+import { BrowserRouter} from 'react-router-dom'
 import user from "@testing-library/user-event";
 import { expect, vi } from "vitest";
-import userEvent from '@testing-library/user-event'
- 
+import userEvent from '@testing-library/user-event' 
+import selectEvent from 'react-select-event'
+
 const AllTheProviders = ({children}:{children:React.ReactNode}) => {
   return (
     <BrowserRouter >
@@ -22,5 +23,5 @@ const customRender = (
  
   
 export * from '@testing-library/react'
-export { customRender as render, expect, vi, user, userEvent }
+export { customRender as render, expect, vi, user, userEvent,selectEvent}
   

@@ -1,5 +1,4 @@
 import { useState } from "react"
-import reactsvg from "../../assets/react.svg"
 import earth from "../../assets/earth.gif"
 import city from "../../assets/city.png"
  const Login = () => {
