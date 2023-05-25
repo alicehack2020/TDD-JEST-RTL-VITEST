@@ -21,11 +21,15 @@ import { render } from "@testing-library/react";
 const routerData = [
     {
         path: "/",
-        content:/Welcome to home/i
+        test: () => {
+          return screen.getByRole('heading', { level: 1, name: /Welcome to home/i })
+        } 
     },
     {
-        path: "/login",
-        content:/Welcome To Tree Foundation/i
+      path: "/login",
+       test: () => {
+        return screen.getByRole('heading', { level: 1, name: /Welcome To Tree Foundation/i })
+      }
     }
 
 ]
@@ -38,14 +42,10 @@ describe("navigation render", () => {
           initialEntries: [route.path],
           initialIndex: 0
         });
-  
         render(
           <RouterProvider router={router} />
         );
-  
-        const {content} = route;
-  
-        expect(screen.getByRole('heading', { level: 1, name: content })).toBeInTheDocument();
+        expect(route.test()).toBeInTheDocument();
       });
     });
   });
