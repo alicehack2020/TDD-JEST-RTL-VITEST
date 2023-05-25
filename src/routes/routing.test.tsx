@@ -2,37 +2,24 @@ import {screen} from "../test/Test-utils";
 import { RouterProvider,createMemoryRouter } from 'react-router-dom';
 import { routes } from "./router";
 import { render } from "@testing-library/react";
-// describe("navigation render", () => {
-   
-//     test('home page render',async () => {
-
-//         const router = createMemoryRouter(routes,{
-//             initialEntries:["/login",'/'],
-//             initialIndex:1
-//         })
-//         render(<RouterProvider router={router} />)
-//         expect(screen.getByRole('heading', {
-//             level:1,name:/Welcome to home/i
-//         })).toBeInTheDocument();
-//     })
  
-// })
-
 const routerData = [
     {
         path: "/",
-        test: () => {
-          return screen.getByRole('heading', { level: 1, name: /Welcome to home/i })
-        } 
+        headingTitle:'Welcome to home'
+        
     },
     {
       path: "/login",
-       test: () => {
-        return screen.getByRole('heading', { level: 1, name: /Welcome To Tree Foundation/i })
-      }
+      headingTitle:'Welcome To Tree Foundation'
     }
 
 ]
+
+function assert(headingTitle:string){
+   return screen.getByRole('heading', { level: 1, name: headingTitle })
+}
+
 
 
 describe("navigation render", () => {
@@ -45,7 +32,7 @@ describe("navigation render", () => {
         render(
           <RouterProvider router={router} />
         );
-        expect(route.test()).toBeInTheDocument();
+        expect(assert.call(route,route.headingTitle)).toBeInTheDocument();
       });
     });
   });
