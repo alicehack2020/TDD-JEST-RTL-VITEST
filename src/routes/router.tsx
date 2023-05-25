@@ -3,6 +3,7 @@ import Login from "../components/auth/Login";
 import Home from "../pages/Home";
 import NotFound from "../pages/NotFound";
 import Root from "./root";
+import Form from "../components/Form";
 
 export const routes = [
   {
@@ -12,6 +13,10 @@ export const routes = [
       {
         index:true,
         element: <Home />,
+      },
+      {
+        path:'/form',
+        element: <Form />,
       },
       {
         path: "/login",

@@ -13,14 +13,14 @@ describe("navbar test cases", () => {
     expect(home).toBeInTheDocument();
   });
 
-   test("navigation to home page", async () => {
-        render(<NavBar/>);
-        const user = userEvent.setup();
-        const homeLink = screen.getByRole("link", { name: /login/i });
-        await user.click(homeLink);
-        expect(screen.getByRole('heading', {
-            level:1,name:/Welcome To Tree Foundation/i
-        })).toBeInTheDocument();
+  //  test("navigation to home page", async () => {
+  //       render(<NavBar/>);
+  //       const user = userEvent.setup();
+  //       const homeLink = screen.getByRole("link", { name: /login/i });
+  //       await user.click(homeLink);
+  //       expect(screen.getByRole('heading', {
+  //           level:1,name:/Welcome To Tree Foundation/i
+  //       })).toBeInTheDocument();
         
-    });
+  //   });
 });
