@@ -1,6 +1,6 @@
 import React,{ReactElement} from 'react'
 import {render,RenderOptions} from '@testing-library/react'
-import { BrowserRouter ,MemoryRouter} from 'react-router-dom'
+import { BrowserRouter} from 'react-router-dom'
 import user from "@testing-library/user-event";
 import { expect, vi } from "vitest";
 import userEvent from '@testing-library/user-event' 
