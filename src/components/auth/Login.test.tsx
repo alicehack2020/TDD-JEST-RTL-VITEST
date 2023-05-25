@@ -1,19 +1,11 @@
-import {  render, screen } from "@testing-library/react"
-import userEvent from '@testing-library/user-event'
-import Login from "./Login"
-import { expect } from "vitest";
- 
-
+ import { expect, render, screen,userEvent } from "../../test/Test-utils";
+ import Login from "./Login"
 const formData ={
     username:'mangesh123',
     password:'12345'
 }
 
- 
-
 describe('Login Form',()=>{
-
- 
     test('renders correclty', () => {
         render(<Login />)
         const loginHeading = screen.getByRole('heading', {
@@ -25,7 +17,7 @@ describe('Login Form',()=>{
             name:/Enter Your Name/i
         })
         const userPasswordInput = screen.getByLabelText(/Enter Your Password/i)
-         const loginButton = screen.getByRole('button')
+        const loginButton = screen.getByRole('button')
 
 
         expect(loginHeading).toBeInTheDocument()
