@@ -34,7 +34,7 @@ import city from "../../assets/city.png"
           className='text-xl text-green-400 '>
           Welcome To Tree Foundation
         </h1> 
-          <div className="w-50 flex-col">
+          <div className="w-50 flex-col bg">
             <div>
               <label className="mt-4" htmlFor="userName">Enter Your Name </label>  
               <input type="text" id="userName" name="userName" placeholder="Enter Your Name" className=" w-full my-2 p-2 border-2 border-gray-300 rounded-md outline-transparent hover:outline-green-400" value={info.userName} onChange={onValueChange}/> 

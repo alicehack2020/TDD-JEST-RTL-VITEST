@@ -12,6 +12,10 @@ const navItem = [
   {
     href:"/form",
     title:"Form"
+  },
+  {
+    href:"/register",
+    title:"Register"
   }
 ]
 

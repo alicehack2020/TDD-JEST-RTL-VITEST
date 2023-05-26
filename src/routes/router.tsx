@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import NotFound from "../pages/NotFound";
 import Root from "./root";
 import Form from "../components/Form";
+import Register from "../components/auth/Register";
 
 export const routes = [
   {
@@ -17,6 +18,10 @@ export const routes = [
       {
         path:'/form',
         element: <Form />,
+      },
+      {
+        path:'/register',
+        element: <Register />,
       },
       {
         path: "/login",
