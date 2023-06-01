@@ -31,7 +31,8 @@ describe("navigation render", () => {
         });
         render(
           <RouterProvider router={router} />
-        );
+          );
+          
         expect(assert.call(route,route.headingTitle)).toBeInTheDocument();
       });
     });

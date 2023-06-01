@@ -5,6 +5,8 @@ import NotFound from "../pages/NotFound";
 import Root from "./root";
 import Form from "../components/Form";
 import Register from "../components/auth/Register";
+import { CounterPage } from "../pages/CounterPage";
+import Products from "../pages/Products";
 
 export const routes = [
   {
@@ -20,12 +22,20 @@ export const routes = [
         element: <Form />,
       },
       {
+        path:'/counter',
+        element: <CounterPage />,
+      },
+      {
         path:'/register',
         element: <Register />,
       },
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/products",
+        element: <Products />,
       },
     ],
   },

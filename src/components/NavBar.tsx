@@ -16,6 +16,14 @@ const navItem = [
   {
     href:"/register",
     title:"Register"
+  },
+  {
+    href:"/counter",
+    title:"Counter"
+  },
+  {
+    href:"/products",
+    title:"Products"
   }
 ]
 
