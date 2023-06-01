@@ -1,37 +1,48 @@
-import { useContext, useEffect } from "react"
-import { cartContextInfo } from "../App"
-
-// category: "men's clothing"
-// description: "Ylaptop (up to 15 inches) in the padded sleeve, your everyday"
-// id: 1
-// image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
-// price: 109.95
-// rating: {rate: 3.9, count: 120}
-// title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops"
-
+import { useGlobalContext } from "../reducer/cartContext"
 const Products = () => {
-    const { addItem, removeItem, increaseQuantity, decreaseQuantity, clearCart,data } = useContext(cartContextInfo) 
-   
-    useEffect(() => {
-        console.log(data)
-    },[])
+    const { addItem, removeItem, increaseQuantity, decreaseQuantity, clearCart, cartData,load } = useGlobalContext()
+ 
+     
 
-  return (
-      <div className="grid place-content-start w-full border border-red-700 items-center">
-          
-              {
-                  data.map((e, index) => (
-                              <div>
-                                    <p>{e?.category}</p>
-                                    <p>{e?.id}</p>
-                                    <p>{e?.price}</p>
-                                    <p>{e?.title}</p>
-                              </div>
-                ))    
-          } 
-          
-          
-          </div>        
+    return (
+        <>
+             
+             <div className="flex justify-end p-4">
+              <button className="p-2 bg-red-400 rounded-lg shadow-md m-2 hover:lowercase" onClick={clearCart}>CLEAR</button>
+              <button className="p-2 bg-red-400 rounded-lg shadow-md m-2 hover:lowercase" onClick={load}>RELOAD</button>
+             </div>
+            
+            {
+             cartData.length>0?(<div className="grid place-content-start w-full  items-center grid-cols-4 gap-4 p-4 overflow-x-hidden mt-8">
+             {
+               cartData?.map((e:any, index:number) => (
+                 <div className="shadow-lg relative p-2     ">
+                   <div className="flex justify-between px-6">
+                   <p>{e?.category}</p>
+                   <img src={e.image} alt="" className="w-20 absolute right-0 -top-4 rounded-lg border-t-8 border-green-600  p-2  hover:w-full  hover:cursor-zoom-in "/> 
+                   </div>
+
+                    <p>{e?.id}</p>
+                    <p>{e?.price}</p>
+                     <p className="mt-4">{e?.title}</p>
+                     <div>
+                     <button className="p-2 bg-green-400 rounded-lg shadow-md m-2">ADD</button>  
+                     <button className="p-2 bg-red-400 rounded-lg shadow-md m-2" onClick={()=>removeItem(e?.id)}>REMOVE</button>  
+                      </div>
+                    
+               </div>
+               ))    
+         } 
+         
+
+                </div>) : <div className="grid place-content-center animate-pulse">
+                        
+                        <img src="https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-3349860-2810775.png?f=avif" alt="" />
+         </div>   
+            }
+             
+      </>
+             
   )
 }
 
