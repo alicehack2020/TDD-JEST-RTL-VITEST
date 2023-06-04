@@ -24,6 +24,10 @@ const navItem = [
   {
     href:"/products",
     title:"Products"
+  },
+  {
+    href:"/feedback",
+    title:"Feedback"
   }
 ]
 

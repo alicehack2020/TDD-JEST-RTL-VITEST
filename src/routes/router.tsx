@@ -7,6 +7,7 @@ import Form from "../components/Form";
 import Register from "../components/auth/Register";
 import { CounterPage } from "../pages/CounterPage";
 import Products from "../pages/Products";
+import  Feedback  from "../pages/Feedback";
 
 export const routes = [
   {
@@ -36,6 +37,10 @@ export const routes = [
       {
         path: "/products",
         element: <Products />,
+      },
+      {
+        path: "/feedback",
+        element: <Feedback />,
       },
     ],
   },
